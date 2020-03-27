@@ -32,7 +32,7 @@ def get_homework_statuses(current_timestamp):
     try:
         homework_statuses = requests.get(API_URL, headers = headers, params = params)
     except Exception as e:
-        return print(f'Что-то пошло не так при запросе — {e}')
+        print(f'Что-то пошло не так при запросе — {e}')
     
     return homework_statuses.json()
 
@@ -52,8 +52,9 @@ def main():
                 send_message(parse_homework_status(homeworks[0]))
             current_timestamp = new_homework.get('current_date')  # обновить timestamp
             time.sleep(300)  # опрашивать раз в пять минут
-
-        except (Exception, KeyboardInterrupt) as e:
+        except KeyboardInterrupt:
+            break
+        except Exception as e:
             return print(f'Бот остановлен по причине: {e}')
 
 if __name__ == '__main__':
