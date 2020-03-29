@@ -26,15 +26,17 @@ def parse_homework_status(homework):
 
 
 def get_homework_statuses(current_timestamp):
+    homework_statuses = {'homeworks': [], 'current_date': current_timestamp}
     headers = {'Authorization': f'OAuth {PRAKTIKUM_TOKEN}'}
     params = {'from_date': current_timestamp}
     
     try:
-        homework_statuses = requests.get(API_URL, headers = headers, params = params)
+        response = requests.get(API_URL, headers = headers, params = params)
+        homework_statuses = response.json()
     except Exception as e:
         print(f'Что-то пошло не так при запросе — {e}')
     
-    return homework_statuses.json()
+    return homework_statuses
 
 
 def send_message(message):
