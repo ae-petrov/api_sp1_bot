@@ -49,7 +49,7 @@ def main():
     while True:
         try:
             new_homework = get_homework_statuses(current_timestamp)
-            homeworks = new_homework.get('homeworks')
+            homeworks = new_homework.get('homeworks', [])
             if homeworks:
                 send_message(parse_homework_status(homeworks[0]))
             current_timestamp = new_homework.get('current_date')  # обновить timestamp
