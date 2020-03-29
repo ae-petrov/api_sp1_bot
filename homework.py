@@ -49,8 +49,10 @@ def main():
     while True:
         try:
             new_homework = get_homework_statuses(current_timestamp)
-            homeworks = new_homework.get('homeworks', [])
-            if homeworks:
+            homeworks = new_homework.get('homeworks')
+            if homeworks is None:
+                return print(f'В ответе сервера отсутствует ключ ''homeworks''')
+            else:
                 send_message(parse_homework_status(homeworks[0]))
             current_timestamp = new_homework.get('current_date')  # обновить timestamp
             time.sleep(300)  # опрашивать раз в пять минут
