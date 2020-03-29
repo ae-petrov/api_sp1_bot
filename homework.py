@@ -54,8 +54,8 @@ def main():
                 return print(f'В ответе сервера отсутствует ключ ''homeworks''')
             else:
                 send_message(parse_homework_status(homeworks[0]))
-            current_timestamp = new_homework.get('current_date')  # обновить timestamp
-            time.sleep(300)  # опрашивать раз в пять минут
+                current_timestamp = new_homework.get('current_date')  # обновить timestamp
+                time.sleep(300)  # опрашивать раз в пять минут
         except KeyboardInterrupt:
             break
         except Exception as e:
